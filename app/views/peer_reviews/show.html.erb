@@ -36,8 +36,8 @@
         <% improvement_no      = improvement_hash['No'] || 0 %>
         <tr>
           <td><%= level %></td>
-          <td><%= "x" * count %></td>
-          <td><%= "+" * improvement_yes %><%= '-' * improvement_no %><% '?' * improvement_unknown %></td>
+          <td><%= 'x' * count %></td>
+          <td><%= '+' * improvement_yes %><%= '-' * improvement_no %><%= '?' * improvement_unknown %></td>
         </tr>
       <% end %>
     </table>

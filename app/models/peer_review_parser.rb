@@ -46,7 +46,12 @@ class PeerReviewParser
     array   = level_to_count.map do |level, count|
       LEVEL_TO_SCALE[level] * count
     end
-    average = (array.inject { |sum, el| sum + el }.to_f / level_to_count.values.inject { |sum, el| sum + el })
+
+    numerator = array.inject { |sum, el| sum + el }.to_f
+    denominator = level_to_count.values.inject { |sum, el| sum + el }
+    return "I don't have enough information to rate" if denominator == 0
+
+    average = numerator / denominator
     SCALE_TO_LEVEL[average.round]
   end
 
@@ -110,7 +115,7 @@ class PeerReviewParser
     text_feedback                = {}
     last_header                  = nil
     last_value                   = nil
-    puts contents
+
     CSV.parse(contents, headers: true) do |line|
       line.each do |header, value|
         next if skip_header?(header)

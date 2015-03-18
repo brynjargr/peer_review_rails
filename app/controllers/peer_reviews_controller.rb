@@ -4,7 +4,7 @@ class PeerReviewsController < ApplicationController
   # GET /peer_reviews
   # GET /peer_reviews.json
   def index
-    @peer_reviews = PeerReview.all
+    @peer_reviews = PeerReview.all.order(:name)
   end
 
   # GET /peer_reviews/1
