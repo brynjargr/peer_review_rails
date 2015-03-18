@@ -1,0 +1,75 @@
+<div class="show-body">
+  <p id="notice"><%= notice %></p>
+  <h1><%= @peer_review.name %></h1>
+
+  <h2>Overall Distribution</h2>
+  <p>This shows how many attributes were rated at each level across all the questions.</p>
+  <table class="table overall_table">
+    <tr>
+      <th class="first_column"></th>
+      <th>Count</th>
+    </tr>
+  <% @averages.each do |level, count| %>
+    <tr>
+      <td><%= level %></td>
+      <td><%= "x" * count %></td>
+    </tr>
+  <% end %>
+  </table>
+  <hr/>
+
+  <% i = 0 %>
+  <% @counts.each do |header, level_to_count| %>
+    <% i += 1 %>
+    <%= render partial: 'header', locals: {header: header} %>
+
+    <table class="table details_table">
+      <tr>
+        <th class="first_column"></th>
+        <th>Level</th>
+        <th>Improvement</th>
+      </tr>
+      <% level_to_count.each do |level, count| %>
+        <% improvement_hash    = @parser.improvements[header][level] || {} %>
+        <% improvement_unknown = improvement_hash['Not Sure'] || 0 %>
+        <% improvement_yes     = improvement_hash['Yes'] || 0 %>
+        <% improvement_no      = improvement_hash['No'] || 0 %>
+        <tr>
+          <td><%= level %></td>
+          <td><%= "x" * count %></td>
+          <td><%= "+" * improvement_yes %><%= '-' * improvement_no %><% '?' * improvement_unknown %></td>
+        </tr>
+      <% end %>
+    </table>
+    <br/>
+    <table class="table summary_table">
+      <tr>
+        <td class="first_column"><b>Average</b></td>
+        <td><%= @parser.average_level(level_to_count)%></td>
+      </tr>
+      <% if @self_review_counts %>
+        <% self_review_value = @self_review_counts[header].select{|k, v| v > 0}.keys.first %>
+        <tr>
+          <td class="first_column"><b>Self Evaluation</b></td>
+          <td><%= self_review_value %></td>
+        </tr>
+      <% end %>
+    </table>
+
+    <% if i % 2 == 0 %>
+      <hr class="break"/>
+    <% else %>
+      <hr/>
+    <% end %>
+  <% end %>
+
+  <% @text_feedback.each do |header, values| %>
+    <h2><%= header %></h2>
+    <ul>
+    <% values.each do |value| %>
+      <li><%= value %></li>
+    <% end %>
+    </ul>
+    <hr class="break"/>
+  <% end %>
+</div>
