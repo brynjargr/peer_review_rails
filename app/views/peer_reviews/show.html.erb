@@ -1,6 +1,17 @@
+<% content_for :title do %>
+  <%= @peer_review.name %>-<%= @peer_review.year %>-<%= @peer_review.month.to_s.rjust(2,'0') %>
+<% end %>
+
+<div class="print-hide">
+<%= link_to 'Print', '#', onclick: 'window.print()' %> |
+<%= link_to 'Edit', edit_peer_review_path(@peer_review) %> |
+<%= link_to 'Destroy', @peer_review, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back', peer_reviews_path %>
+</div>
+
 <div class="show-body">
   <p id="notice"><%= notice %></p>
-  <h1><%= @peer_review.name %></h1>
+  <h1><%= @peer_review.name %> - <%= Date::MONTHNAMES[@peer_review.month] %> <%= @peer_review.year %></h1>
 
   <h2>Overall Distribution</h2>
   <p>This shows how many attributes were rated at each level across all the questions.</p>

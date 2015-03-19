@@ -63,3 +63,10 @@
   page-break-after: always;
 }
 
+@media print
+{
+    .print-hide, .print-hide *
+    {
+        display: none !important;
+    }
+}

@@ -4,7 +4,11 @@ class PeerReviewsController < ApplicationController
   # GET /peer_reviews
   # GET /peer_reviews.json
   def index
-    @peer_reviews = PeerReview.all.order(:name)
+    @names = PeerReview.select(:name).group(:name).order('max(year) DESC, max(month) DESC').map(&:name)
+    @names_to_reviews = {}
+    @names.each do |name|
+      @names_to_reviews[name] = PeerReview.where(name: name).order(year: :desc, month: :desc)
+    end
   end
 
   # GET /peer_reviews/1
@@ -74,6 +78,6 @@ class PeerReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def peer_review_params
-      params[:peer_review].permit(:peer_reviews,:self_review,:name)
+      params[:peer_review].permit(:peer_reviews,:self_review,:name,:month,:year)
     end
 end
