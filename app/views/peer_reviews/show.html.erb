@@ -7,6 +7,12 @@
 <%= link_to 'Edit', edit_peer_review_path(@peer_review) %> |
 <%= link_to 'Destroy', @peer_review, method: :delete, data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back', peer_reviews_path %>
+<% if @previous_peer_review.present? %>
+  | <%= link_to 'Previous Review', @previous_peer_review %>
+<% end %>
+<% if @next_peer_review.present? %>
+  | <%= link_to 'Next Review', @next_peer_review %>
+<% end %>
 </div>
 
 <div class="show-body">
