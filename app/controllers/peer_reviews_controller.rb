@@ -4,7 +4,7 @@ class PeerReviewsController < ApplicationController
   # GET /peer_reviews
   # GET /peer_reviews.json
   def index
-    @names = PeerReview.select(:name).group(:name).order('max(year) DESC, max(month) DESC').map(&:name)
+    @names = PeerReview.select(:name).group(:name).order('max(year || substr(\'00\' || month, -2, 2)) DESC').map(&:name)
     @names_to_reviews = {}
     @names.each do |name|
       @names_to_reviews[name] = PeerReview.where(name: name).order(year: :desc, month: :desc)
