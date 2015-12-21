@@ -80,6 +80,6 @@ class PeerReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def peer_review_params
-      params[:peer_review].permit(:peer_reviews,:self_review,:name,:month,:year)
+      params[:peer_review].permit(:peer_reviews,:self_review,:name,:month,:year,:people_sent)
     end
 end
