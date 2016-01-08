@@ -84,7 +84,7 @@
     <h2><%= header %></h2>
     <ul>
     <% values.each do |value| %>
-      <li><%= value %></li>
+      <li><%= value.html_safe %></li>
     <% end %>
     </ul>
     <hr class="break"/>

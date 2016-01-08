@@ -121,7 +121,7 @@ class PeerReviewParser
         next if skip_header?(header)
         if text_feedback_header?(header)
           text_feedback[header] ||= []
-          text_feedback[header] << value.to_s
+          text_feedback[header] << value.to_s.gsub("\n","<br>")
         elsif level_header?(header)
           counts[header]        ||= new_header_row(header)
           counts[header][value] += 1
