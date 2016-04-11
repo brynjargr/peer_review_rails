@@ -69,8 +69,10 @@ class PeerReviewParser
       :text_feedback
     elsif header.include?('[Level]') || header.include?('[Scale]')
       :level
-    else
+    elsif header.include?('improve') || header.include?('improving') || header.include?('becoming more')
       :improvement
+    else
+      :text_feedback
     end
   end
 
