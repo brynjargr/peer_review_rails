@@ -24,7 +24,7 @@ class PeerReviewParser
 
   SCALE_TO_LEVEL     = LEVEL_TO_SCALE.invert
 
-  attr_accessor :counts, :improvements, :text_feedback, :self_review_counts
+  attr_accessor :counts, :improvements, :text_feedback, :self_review_counts, :self_review_text
 
   def initialize(peer_reviews, self_review = nil)
     process_feedback(peer_reviews, self_review)
@@ -59,7 +59,7 @@ class PeerReviewParser
 
   def process_feedback(peer_reviews, self_review)
     @counts, @improvements, @text_feedback = process_csv(peer_reviews)
-    @self_review_counts, _, _ = process_csv(self_review) if self_review.present?
+    @self_review_counts, _, @self_review_text = process_csv(self_review) if self_review.present?
   end
 
   def header_type(header)

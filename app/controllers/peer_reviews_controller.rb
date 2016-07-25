@@ -19,6 +19,7 @@ class PeerReviewsController < ApplicationController
     @counts = @parser.counts
     @self_review_counts = @parser.self_review_counts
     @text_feedback = @parser.text_feedback
+    @self_review_text = @parser.self_review_text
     @previous_peer_review = @peer_review.previous
     @next_peer_review = @peer_review.next
   end

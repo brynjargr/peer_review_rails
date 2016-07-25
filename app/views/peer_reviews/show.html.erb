@@ -85,6 +85,9 @@
     <% values.each do |value| %>
       <li><%= value.html_safe %></li>
     <% end %>
+    <% if @self_review_text.present? && @self_review_text[header].present? && @self_review_text[header].first.present? %>
+      <li><strong>Self Evaluation:</strong> <%= @self_review_text[header].first %></li>
+    <% end %>
     </ul>
     <hr class="break"/>
   <% end %>
