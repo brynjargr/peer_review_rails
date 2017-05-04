@@ -17,6 +17,7 @@ class PeerReviewsController < ApplicationController
     @parser = PeerReviewParser.new(@peer_review.peer_reviews, @peer_review.self_review)
     @averages = @parser.averages_hash
     @counts = @parser.counts
+    @show_overall_section = @counts.values.any?{|h| h.values.any?{|c| c > 0 } }
     @self_review_counts = @parser.self_review_counts
     @text_feedback = @parser.text_feedback
     @self_review_text = @parser.self_review_text

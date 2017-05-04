@@ -18,21 +18,23 @@
   <p id="notice"><%= notice %></p>
   <h1><%= @peer_review.name %> - <%= Date::MONTHNAMES[@peer_review.month] %> <%= @peer_review.year %></h1>
 
-  <h2>Overall Distribution</h2>
-  <p>This shows how many attributes were rated at each level across all the questions.</p>
-  <table class="table overall_table">
-    <tr>
-      <th class="first_column"></th>
-      <th>Count</th>
-    </tr>
-  <% @averages.each do |level, count| %>
-    <tr>
-      <td><%= level %></td>
-      <td><%= "x" * count %></td>
-    </tr>
+  <% if @show_overall_section %>
+    <h2>Overall Distribution</h2>
+    <p>This shows how many attributes were rated at each level across all the questions.</p>
+    <table class="table overall_table">
+      <tr>
+        <th class="first_column"></th>
+        <th>Count</th>
+      </tr>
+    <% @averages.each do |level, count| %>
+      <tr>
+        <td><%= level %></td>
+        <td><%= "x" * count %></td>
+      </tr>
+    <% end %>
+    </table>
+    <hr/>
   <% end %>
-  </table>
-  <hr/>
 
   <% i = 0 %>
   <% @counts.each do |header, level_to_count| %>
