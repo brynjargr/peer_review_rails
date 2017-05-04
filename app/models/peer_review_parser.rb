@@ -131,6 +131,9 @@ class PeerReviewParser
           improvements[last_header]                    ||= {}
           improvements[last_header][last_value]        ||= new_header_row(header)
           improvements[last_header][last_value][value] += 1
+        else
+          text_feedback[header] ||= []
+          text_feedback[header] << value.to_s.gsub("\n","<br>")
         end
         last_header = header
         last_value  = value
